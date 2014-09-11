@@ -128,6 +128,8 @@ resources:
               units:
                 - name: etcd.service
                   command: start
+                - name: fleet.service
+                  command: start
                 - name: fleet.socket
                   command: start
                   content: |
@@ -136,7 +138,7 @@ resources:
                     ListenStream=/var/run/fleet.sock
                     # Talk to the API over an exposed port, uncomment to enable and choose a port
                     ListenStream=10001
-                    Service=fleet.service
+                    #Service=fleet.service
 
                     [Install]
                     WantedBy=sockets.target
@@ -146,8 +148,6 @@ resources:
                     [Unit]
                     After=network-online.target
                     Requires=network-online.target
-                    After=fleet.socket
-                    Requires=fleet.socket
 
                     [Service]
                     WorkingDirectory=/root
