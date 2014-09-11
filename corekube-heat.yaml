@@ -128,19 +128,6 @@ resources:
               units:
                 - name: etcd.service
                   command: start
-                - name: setup-kubernetes.service
-                  command: start
-                  content: |
-                    [Unit]
-                    After=network-online.target
-                    Requires=network-online.target
-
-                    [Service]
-                    WorkingDirectory=/root
-                    Environment="DIR=corekube"
-                    ExecStartPre=/usr/bin/rm -rf $DIR
-                    ExecStartPre=/usr/bin/git clone -b %branch% %repo%
-                    ExecStart=/usr/bin/bash ${DIR}/build_run.sh %branch% %master_count% %minion_count% 1
                 - name: fleet.socket
                   command: start
                   content: |
@@ -153,6 +140,21 @@ resources:
 
                     [Install]
                     WantedBy=sockets.target
+                - name: setup-kubernetes.service
+                  command: start
+                  content: |
+                    [Unit]
+                    After=network-online.target
+                    Requires=network-online.target
+                    After=fleet.socket
+                    Requires=fleet.socket
+
+                    [Service]
+                    WorkingDirectory=/root
+                    Environment="DIR=corekube"
+                    ExecStartPre=/usr/bin/rm -rf $DIR
+                    ExecStartPre=/usr/bin/git clone -b %branch% %repo%
+                    ExecStart=/usr/bin/bash ${DIR}/build_run.sh %branch% %master_count% %minion_count% 1
           params:
             "%discovery%": { get_attr: [discovery, networks, private, 0] }
             "%uuid%": { get_attr: [coreos-cluster-uuid, value] }
