@@ -9,7 +9,7 @@ import (
 // Access the CoreOS / docker etcd API to extract machine information
 func main() {
 	masterCount, minionCount, overlordCount := lib.SetupFlags()
-	expectedMachineCount := masterCount + minionCount + overlordCount
+	expectedMachineCount := masterCount + minionCount
 
 	if expectedMachineCount <= 0 {
 		lib.Usage()

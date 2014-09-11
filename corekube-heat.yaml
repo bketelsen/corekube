@@ -117,10 +117,6 @@ resources:
                 addr: $private_ipv4:4001
                 peer-addr: $private_ipv4:7001
 
-              fleet:
-                public-ip: $private_ipv4
-                metadata: kubernetes_role=overlord
-                  
               update:
                 group: alpha
                 reboot-strategy: off
