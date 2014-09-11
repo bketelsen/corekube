@@ -15,7 +15,7 @@ parameters:
   kubernetes-minion-count:
     description: Number of CoreOS machines to deploy as Kubernetes Minion
     type: number
-    default: 3
+    default: 4
     constraints:
     - range:
         min: 2
@@ -26,7 +26,7 @@ parameters:
     description: Name of key-pair to be used for compute instance
   flavor:
     type: string
-    default: 4 GB Performance
+    default: 2 GB Performance
     constraints:
     - allowed_values:
       - 2 GB Performance
@@ -48,7 +48,7 @@ parameters:
   git-repo:
     type: string
     description: Public git repo url
-    default: "https://github.com/metral/corekube.git"
+    default: "https://github.com/bketelsen/corekube.git"
   git-branch:
     type: string
     description: Git repo branch
