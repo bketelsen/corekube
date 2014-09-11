@@ -128,8 +128,6 @@ resources:
               units:
                 - name: etcd.service
                   command: start
-                - name: fleet.service
-                  command: start
                 - name: setup-kubernetes.service
                   command: start
                   content: |
