@@ -136,12 +136,12 @@ resources:
                     ListenStream=/var/run/fleet.sock
                     # Talk to the API over an exposed port, uncomment to enable and choose a port
                     ListenStream=10001
+                    Environment=FLEET_PUBLIC_IP=$private_ipv4
+                    Environment=FLEET_METADATA=kubernetes_role=overlord
                     Service=fleet.service
 
                     [Install]
                     WantedBy=sockets.target
-                - name: fleet.service
-                  command: start
                 - name: setup-kubernetes.service
                   command: start
                   content: |
